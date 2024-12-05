@@ -1,0 +1,17 @@
+services:
+  pinger1:
+    image: ${IMAGE_NAME:-devops/pinger:latest}
+    ports:
+      - '9000:9000'
+    environment:
+      - PORT=9000
+      - TARGET_PORT=8000
+      - TARGET_HOST=pinger2
+  pinger2:
+    image: ${IMAGE_NAME:-devops/pinger:latest}
+    ports:
+      - '8000:8000'
+    environment:
+      - PORT=8000
+      - TARGET_PORT=9000
+      - TARGET_HOST=pinger1
